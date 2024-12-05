@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-Requirements/ФТ" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.6.3">
+<title data-rh="true">Функциональные требования | B-Wallet</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://AntonIzy.github.io/HWSystemAnalysis/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://AntonIzy.github.io/HWSystemAnalysis/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://AntonIzy.github.io/HWSystemAnalysis/docs/Requirements/ФТ"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Функциональные требования | B-Wallet"><meta data-rh="true" name="description" content="Сценарий 1: Создание нового кошелька для цифрового рубля"><meta data-rh="true" property="og:description" content="Сценарий 1: Создание нового кошелька для цифрового рубля"><link data-rh="true" rel="icon" href="/HWSystemAnalysis/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://AntonIzy.github.io/HWSystemAnalysis/docs/Requirements/ФТ"><link data-rh="true" rel="alternate" href="https://AntonIzy.github.io/HWSystemAnalysis/docs/Requirements/ФТ" hreflang="en"><link data-rh="true" rel="alternate" href="https://AntonIzy.github.io/HWSystemAnalysis/docs/Requirements/ФТ" hreflang="x-default"><script src="https://cdn.jsdelivr.net/npm/docusaurus-plugin-drawio/viewer.min.js"></script><link rel="stylesheet" href="/HWSystemAnalysis/assets/css/styles.3f56d5eb.css">
+<script src="/HWSystemAnalysis/assets/js/runtime~main.38e58a67.js" defer="defer"></script>
+<script src="/HWSystemAnalysis/assets/js/main.55fd3687.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/HWSystemAnalysis/"><div class="navbar__logo"><img src="/HWSystemAnalysis/img/logo.svg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/HWSystemAnalysis/img/logo.svg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">B-Wallet</b></a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/AntonIzy/HWSystemAnalysis" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/HWSystemAnalysis/docs/intro">Домашняя страница</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/HWSystemAnalysis/docs/category/vs">V&amp;S</a><button aria-label="Expand sidebar category &#x27;V&amp;S&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" href="/HWSystemAnalysis/docs/category/требования">Требования</a><button aria-label="Collapse sidebar category &#x27;Требования&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/HWSystemAnalysis/docs/Requirements/ФТ">Функциональные требования</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/HWSystemAnalysis/docs/Requirements/НФТ">Нефункциональные требования</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/HWSystemAnalysis/docs/category/матрица-raci">Матрица RACI</a><button aria-label="Expand sidebar category &#x27;Матрица RACI&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/HWSystemAnalysis/docs/category/диаграммы">Диаграммы</a><button aria-label="Expand sidebar category &#x27;Диаграммы&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/HWSystemAnalysis/docs/category/апи">АПИ</a><button aria-label="Expand sidebar category &#x27;АПИ&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/HWSystemAnalysis/docs/category/архитектура">Архитектура</a><button aria-label="Expand sidebar category &#x27;Архитектура&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/HWSystemAnalysis/docs/category/бд">БД</a><button aria-label="Expand sidebar category &#x27;БД&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/HWSystemAnalysis/docs/category/платформизация">Платформизация</a><button aria-label="Expand sidebar category &#x27;Платформизация&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/HWSystemAnalysis/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/HWSystemAnalysis/docs/category/требования"><span itemprop="name">Требования</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Функциональные требования</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Функциональные требования</h1></header>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="сценарий-1-создание-нового-кошелька-для-цифрового-рубля">Сценарий 1: Создание нового кошелька для цифрового рубля<a href="#сценарий-1-создание-нового-кошелька-для-цифрового-рубля" class="hash-link" aria-label="Direct link to Сценарий 1: Создание нового кошелька для цифрового рубля" title="Direct link to Сценарий 1: Создание нового кошелька для цифрового рубля">​</a></h3>
+<p><strong>Цель</strong>: Корректное создание и привязка нового цифрового кошелька к учётной записи пользователя банка.</p>
+<p><strong>Акторы</strong>:</p>
+<ul>
+<li>
+<p>Пользователь (Клиент банка)</p>
+</li>
+<li>
+<p>Система (Банковское приложение, блокчейн-кошелек)</p>
+</li>
+</ul>
+<p><strong>Предусловия</strong>: Пользователь авторизован в банковском приложении.</p>
+<p><strong>Основной сценарий</strong>:</p>
+<ol>
+<li>
+<p>Пользователь открывает вкладку &quot;Цифровой рубль&quot; в банковском приложении.</p>
+</li>
+<li>
+<p>Система отображает опцию создания нового кошелька для цифрового рубля.</p>
+</li>
+<li>
+<p>Пользователь нажимает кнопку &quot;Создать кошелек&quot;.</p>
+</li>
+<li>
+<p>Система генерирует уникальный адрес кошелька на блокчейне.</p>
+</li>
+<li>
+<p>Кошелек привязывается к учётной записи пользователя.</p>
+</li>
+<li>
+<p>Система отображает сообщение об успешном создании кошелька.</p>
+</li>
+<li>
+<p>Пользователь видит новый кошелек в списке своих счетов.</p>
+</li>
+</ol>
+<p><strong>Исключения:</strong></p>
+<p>Ошибка при создании учетной записи:</p>
+<ul>
+<li>
+<p>Система не может сохранить данные пользователя из-за отсутствия подключения к базе данных.</p>
+</li>
+<li>
+<p>Система уведомляет пользователя о технической проблеме и предлагает повторить попытку позже.</p>
+</li>
+</ul>
+<p>Конфликт данных:</p>
+<ul>
+<li>
+<p>При создании новой учетной записи система обнаруживает, что данные (например, номер телефона или электронная почта) уже существуют в базе данных.</p>
+</li>
+<li>
+<p>Система уведомля ет пользователя о конфликте и предлагает использовать другой адрес или номер.</p>
+</li>
+</ul>
+<p>Проблемы с сохранением кошелька:</p>
+<ul>
+<li>
+<p>Система не может создать запись о кошельке из-за ошибок в структуре данных или ограничений базы данных.</p>
+</li>
+<li>
+<p>Система уведомляет пользователя о проблеме и предлагает обратиться в службу поддержки.</p>
+</li>
+</ul>
+<p><strong>Постусловие</strong>: Кошелек создан и готов для проведения транзакций с цифровым рублем.</p>
+<p><strong>Приоритет</strong>: Высокий.</p>
+<p><strong>Обоснование:</strong> Создание кошелька является основополагающим процессом для дальнейшей работы с цифровым рублем.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="сценарий-2-интеграция-с-платформой-центрального-банка-рф">Сценарий 2: Интеграция с платформой Центрального банка РФ<a href="#сценарий-2-интеграция-с-платформой-центрального-банка-рф" class="hash-link" aria-label="Direct link to Сценарий 2: Интеграция с платформой Центрального банка РФ" title="Direct link to Сценарий 2: Интеграция с платформой Центрального банка РФ">​</a></h3>
+<p><strong>Цель:</strong> Обеспечить корректную интеграцию с платформой ЦБ РФ для выполнения операций с цифровыми рублями.</p>
+<p><strong>Участники:</strong></p>
+<ul>
+<li>
+<p>Систем а блокчейн-кошелька (далее Система)</p>
+</li>
+<li>
+<p>Платформа Центрального банка РФ (далее Платформа)</p>
+</li>
+</ul>
+<p><strong>Предусловие:</strong> Платформа доступна для подключения.</p>
+<p><strong>Основной сценарий:</strong></p>
+<ol>
+<li>
+<p>Система отправляет запрос на авторизацию к Платформе.</p>
+</li>
+<li>
+<p>Платформа проверяет учетные данные и подтверждает подключение.</p>
+</li>
+<li>
+<p>Система передает данные о транзакции с цифровыми рублями на Платформу.</p>
+</li>
+<li>
+<p>Платформа обрабатывает запросы и возвращает статус транзакции.</p>
+</li>
+<li>
+<p>Система обновляет информацию о балансе пользователя.</p>
+</li>
+</ol>
+<p><strong>Исключения:</strong></p>
+<p>Ошибка авторизации:</p>
+<ul>
+<li>
+<p>Платформа отклоняет запрос на авторизацию.</p>
+</li>
+<li>
+<p>Система уведомляет о необходимости повторить авторизацию или проверить учетные данные.</p>
+</li>
+</ul>
+<p>Недоступность платформы:</p>
+<ul>
+<li>
+<p>Система не может установить соединение с Платформой из-за технических проблем.</p>
+</li>
+<li>
+<p>Система уведомляет пользователя о временной недоступности и предлагает повторить попытку позже.</p>
+</li>
+</ul>
+<p>Ошибка передачи данных:</p>
+<ul>
+<li>
+<p>Система не может передать данные о транзакции из-за проблем с сетью или некорректного формата данных.</p>
+</li>
+<li>
+<p>Система уведомляет пользователя о необходимости проверить данные и повторить операцию.</p>
+</li>
+</ul>
+<p>Ошибка обработки транзакции:</p>
+<ul>
+<li>
+<p>Платформа не может обработать транзакцию (например, недостаточно средств на счете).</p>
+</li>
+<li>
+<p>Система уведомляет пользователя о статусе ошибки и предлагает проверить баланс или ввести другую сумму.</p>
+</li>
+</ul>
+<p>Ошибка обновления баланса:</p>
+<ul>
+<li>
+<p>Система не может обновить информацию о балансе пользователя из-за внутренней ошибки.</p>
+</li>
+<li>
+<p>Система уведомляет пользователя о технической проблеме и предлагает обратиться в службу поддержки.</p>
+</li>
+</ul>
+<p><strong>Постусловия:</strong> Транзакция выполнена, данные синхронизированы с ЦБ РФ.</p>
+<p><strong>Приоритет:</strong> Высокий.
+<strong>Обоснование:</strong> Интеграция с платформой ЦБ РФ — ключевой компонент для работы с цифровыми рублями.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="сценарий-3-управление-балансом">Сценарий 3: Управление балансом<a href="#сценарий-3-управление-балансом" class="hash-link" aria-label="Direct link to Сценарий 3: Управление балансом" title="Direct link to Сценарий 3: Управление балансом">​</a></h3>
+<p><strong>Цель:</strong> Обеспечить пользователю возможность просмотра общего баланса, включающего цифровые и электронные рубли, с автоматической конвертацией.</p>
+<p><strong>Участники:</strong></p>
+<ul>
+<li>
+<p>Пользователь</p>
+</li>
+<li>
+<p>Система блокчейн-кошелька (далее Система)</p>
+</li>
+</ul>
+<p><strong>Предусловие:</strong> Пользователь авторизован.</p>
+<p><strong>Основной сценарий:</strong></p>
+<ol>
+<li>
+<p>Пользователь открывает интерфейс управления балансом.</p>
+</li>
+<li>
+<p>Система отображает общий баланс, автоматически конвертируя цифровые и электронные рубли.</p>
+</li>
+<li>
+<p>Пользователь может выбрать операцию (перевод, вывод средств, оплата).</p>
+</li>
+<li>
+<p>Система выполняет операцию и обновляет баланс в едином виде.</p>
+</li>
+</ol>
+<p><strong>Исключения:</strong></p>
+<p>Ошибка обновления баланса:</p>
+<ul>
+<li>
+<p>Не удается обновить баланс из-за внутренних проблем системы.</p>
+</li>
+<li>
+<p>Система уведомляет пользователя о технической проблеме и предлагает обратиться в службу поддержки.</p>
+</li>
+</ul>
+<p>Ошибка выполнения операции:</p>
+<ul>
+<li>
+<p>Система не может выполнить выбранную пользователем операцию (например, перевод).</p>
+</li>
+<li>
+<p>Система уведомляет пользователя о причине ошибки (например, недостаточно средств) и предлагает ввести другую  сумму или попробовать снова позже.</p>
+</li>
+</ul>
+<p><strong>Постусловия:</strong> Баланс корректно обновлен с учетом всех активов пользователя.</p>
+<p><strong>Приоритет:</strong> Высокий.
+<strong>Обоснование:</strong> Единый баланс и простота управления средствами критически важны для удобства пользователя.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="сценарий-4-оплата-и-перевод-средств">Сценарий 4: Оплата и перевод средств<a href="#сценарий-4-оплата-и-перевод-средств" class="hash-link" aria-label="Direct link to Сценарий 4: Оплата и перевод средств" title="Direct link to Сценарий 4: Оплата и перевод средств">​</a></h3>
+<p><strong>Цель:</strong> Обеспечить пользователю возможность оплаты и перевода средств между кошельками с использованием цифровых рублей.</p>
+<p><strong>Участники:</strong></p>
+<ul>
+<li>
+<p>Пользователь</p>
+</li>
+<li>
+<p>Система блокчейн-кошелька (далее Система)</p>
+</li>
+</ul>
+<p><strong>Предусловие:</strong> Пользователь авторизован и имеет положительный баланс.</p>
+<p><strong>Основной сценарий:</strong></p>
+<ol>
+<li>
+<p>Пользователь выбирает операцию оплаты/перевода.</p>
+</li>
+<li>
+<p>Пользователь вводит данные получателя и сумму.</p>
+</li>
+<li>
+<p>Система проверяет баланс и доступные средства.</p>
+</li>
+<li>
+<p>Система выполняет операцию и обновляет б аланс.</p>
+</li>
+<li>
+<p>Пользователь получает уведомление о выполненной оплате.</p>
+</li>
+</ol>
+<p><strong>Исключения:</strong></p>
+<ul>
+<li>
+<p>Недостаточно средств: система уведомляет пользователя и предлагает уменьшить сумму.</p>
+</li>
+<li>
+<p>Ошибка подключения: система уведомляет пользователя о временной недоступности.</p>
+</li>
+<li>
+<p>Некорректные данные получателя: система предлагает проверить данные и повторить ввод.</p>
+</li>
+</ul>
+<p><strong>Постусловие:</strong> Средства успешно переведены, баланс обновлен.</p>
+<p><strong>Приоритет:</strong> Высокий.</p>
+<p><strong>Обоснование:</strong> Ключевая функция.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="сценарий-5-пополнение-баланса-и-вывод-средств-через-банковские-сервисы">Сценарий 5: Пополнение баланса и вывод средств через банковские сервисы.<a href="#сценарий-5-пополнение-баланса-и-вывод-средств-через-банковские-сервисы" class="hash-link" aria-label="Direct link to Сценарий 5: Пополнение баланса и вывод средств через банковские сервисы." title="Direct link to Сценарий 5: Пополнение баланса и вывод средств через банковские сервисы.">​</a></h3>
+<p><strong>Цель:</strong> Обеспечить пользователю возможность пополнять баланс и выводить средства через банковские сервисы.</p>
+<p><strong>Уч астники:</strong></p>
+<ul>
+<li>
+<p>Пользователь</p>
+</li>
+<li>
+<p>Система блокчейн-кошелька (далее Система)</p>
+</li>
+<li>
+<p>Банк</p>
+</li>
+</ul>
+<p><strong>Предусловие:</strong> Пользователь привязал банковский счет к системе.</p>
+<p><strong>Основной сценарий:</strong></p>
+<ol>
+<li>
+<p>Пользователь выбирает опцию пополнения или вывода средств через банковские сервисы.</p>
+</li>
+<li>
+<p>Система запрашивает подтверждение операции.</p>
+</li>
+<li>
+<p>Пользователь подтверждает операцию.</p>
+</li>
+<li>
+<p>Система отправляет запрос в банк на выполнение операции.</p>
+</li>
+<li>
+<p>Банк подтверждает операцию, и средства зачисляются на счет пользователя.</p>
+</li>
+</ol>
+<p><strong>Исключения:</strong></p>
+<p><strong>Недостаточно средств на банковском счете (для пополнения):</strong></p>
+<ul>
+<li>
+<p>Банк отклоняет запрос на пополнение из-за нехватки средств.</p>
+</li>
+<li>
+<p>Система уведомляет пользователя и предлагает выбрать меньшую сумму или пополнить счет.</p>
+</li>
+</ul>
+<p><strong>Лимиты транзакций (ограничения банка):</strong></p>
+<ul>
+<li>
+<p>Банк отклоняет операцию из-за превышения лимита на вывод или пополнение.</p>
+</li>
+<li>
+<p>Система уведомляет пользователя и предлагает выбрать сумму в рамках лимитов.</p>
+</li>
+</ul>
+<p><strong>Задержка выполнения операции:</strong></p>
+<ul>
+<li>
+<p>Банк обрабатывает запрос дольше ожидаемого времени.</p>
+</li>
+<li>
+<p>Система уведомляет пользователя о задержке и о том, что операция будет завершена позже.</p>
+</li>
+</ul>
+<p><strong>Постусловия:</strong> Средства успешно зачислены или выведены через банковские сервисы.</p>
+<p><strong>Приоритет:</strong> Высокий.
+<strong>Обоснование:</strong> Интеграция с банковскими сервисами важна для удобства пополнения и вывода средств.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="сценарий-6-управление-данными-пользователей"><strong>Сценарий 6:</strong> Управление данными пользователей<a href="#сценарий-6-управление-данными-пользователей" class="hash-link" aria-label="Direct link to сценарий-6-управление-данными-пользователей" title="Direct link to сценарий-6-управление-данными-пользователей">​</a></h3>
+<p><strong>Цель:</strong> Обеспечить управление данными пользователей, связанными с их учетными записями и кошельками.</p>
+<p><strong>Акторы:</strong></p>
+<ul>
+<li>
+<p>Пользователь</p>
+</li>
+<li>
+<p>Система (База данных, банковское приложение)</p>
+</li>
+</ul>
+<p><strong>Предусловия:</strong> Система работает корректно, пользователь авторизован.</p>
+<p><strong>Основной сценарий:</strong></p>
+<ol>
+<li>
+<p>Пользователь создает учетную запись в банковском приложении.</p>
+</li>
+<li>
+<p>Система сохраняет данные пользователя (ФИО, адрес, контактные данные) в базе данных.</p>
+</li>
+<li>
+<p>Система создает запись о кошельке, связывая его с учетной записью пользователя.</p>
+</li>
+<li>
+<p>При обновлении информации о пользователе, система обновляет соответствующие записи в базе данных.</p>
+</li>
+</ol>
+<p><strong>Исключения:</strong></p>
+<p>Ошибка при обновлении данных пользователя:</p>
+<ul>
+<li>
+<p>При попытке обновить данные пользователя возникает ошибка (например, некорректный формат данных).</p>
+</li>
+<li>
+<p>Система уведомляет пользователя о необходимости исправить данные и повторить операцию.</p>
+</li>
+</ul>
+<p><strong>Постусловие:</strong> Данные пользователей доступны для обработки.</p>
+<p><strong>Приоритет:</strong> Средний.</p>
+<p><strong>Обоснование:</strong> Управление данными пользователей необходимо для обеспечения безопасности и поддержки функциональности приложения.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="сценарий-7-история-транзакций-и-отчеты">Сценарий 7: История транзакций и отчеты<a href="#сценарий-7-история-транзакций-и-отчеты" class="hash-link" aria-label="Direct link to Сценарий 7: История транзакций и отчеты" title="Direct link to Сценарий 7: История транзакций и отчеты">​</a></h3>
+<p><strong> Цель:</strong> Обеспечить пользователю возможность просматривать и экспортировать историю операций без разделения по активам.</p>
+<p><strong>Участники:</strong></p>
+<ul>
+<li>
+<p>Пользователь</p>
+</li>
+<li>
+<p>Система блокчейн-кошелька (далее Система)</p>
+</li>
+</ul>
+<p><strong>Предусловие:</strong> Пользователь авторизован.</p>
+<p><strong>Основной сценарий:</strong></p>
+<ol>
+<li>
+<p>Пользователь открывает раздел истории транзакций.</p>
+</li>
+<li>
+<p>Система отображает все транзакции (как цифровые, так и электронные рубли) в одном интерфейсе.</p>
+</li>
+<li>
+<p>Пользователь фильтрует транзакции по дате или типу операции.</p>
+</li>
+<li>
+<p>Система генерирует отчет и предоставляет его пользователю.</p>
+</li>
+</ol>
+<p><strong>Исключения:</strong></p>
+<p><strong>Ошибка доступа к данным:</strong></p>
+<ul>
+<li>
+<p>Система не может загрузить историю транзакций из-за временных проблем с сервером.</p>
+</li>
+<li>
+<p>Пользователь уведомлен о сбое и предложено попробовать позже.</p>
+</li>
+</ul>
+<p><strong>Ошибка фильтрации:</strong></p>
+<ul>
+<li>
+<p>Фильтрация транзакций по дате или типу операции не работает из-за некорректного ввода данных.</p>
+</li>
+<li>
+<p>Система уведомляет пользователя и предлагает ввести корректные данные для фильтрации.</p>
+</li>
+</ul>
+<p><strong>Неполные данные:</strong></p>
+<ul>
+<li>
+<p>Транзакции могут быть частично недоступны из-за задержек синхронизации данных с платформами.</p>
+</li>
+<li>
+<p>Пользователь получает уведомление о необходимости повторить запрос позже для полной информации.</p>
+</li>
+</ul>
+<p><strong>Постусловия:</strong> История транзакций отображена.</p>
+<p><strong>Приоритет:</strong> Средний.
+<strong>Обоснование:</strong> Возможность отслеживания и анализа транзакций важна для финансового контроля.</p>
+<hr>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="пояснения">Пояснения:<a href="#пояснения" class="hash-link" aria-label="Direct link to Пояснения:" title="Direct link to Пояснения:">​</a></h4>
+<p>Этот формат (Use Case) был выбран, так как он четко описывает взаимодействие системы с пользователями и процесс работы ключевых функций продукта. - В общем Use Case очень удобен. Приоритеты определялись на основе значимости функций для пользователя в первой версии продукта.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/AntonIzy/HWSystemAnalysis/docs/Requirements/ФТ.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/HWSystemAnalysis/docs/category/требования"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Требования</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/HWSystemAnalysis/docs/Requirements/НФТ"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Нефункциональные требования</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#сценарий-1-создание-нового-кошелька-для-цифрового-рубля" class="table-of-contents__link toc-highlight">Сценарий 1: Создание нового кошелька для цифрового рубля</a></li><li><a href="#сценарий-2-интеграция-с-платформой-центрального-банка-рф" class="table-of-contents__link toc-highlight">Сценарий 2: Интеграция с платформой Центрального банка РФ</a></li><li><a href="#сценарий-3-управление-балансом" class="table-of-contents__link toc-highlight">Сценарий 3: Управление балансом</a></li><li><a href="#сценарий-4-оплата-и-перевод-средств" class="table-of-contents__link toc-highlight">Сценарий 4: Оплата и перевод средств</a></li><li><a href="#сценарий-5-пополнение-баланса-и-вывод-средств-через-банковские-сервисы" class="table-of-contents__link toc-highlight">Сценарий 5: Пополнение бала нса и вывод средств через банковские сервисы.</a></li><li><a href="#сценарий-6-управление-данными-пользователей" class="table-of-contents__link toc-highlight"><strong>Сценарий 6:</strong> Управление данными пользователей</a></li><li><a href="#сценарий-7-история-транзакций-и-отчеты" class="table-of-contents__link toc-highlight">Сценарий 7: История транзакций и отчеты</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/HWSystemAnalysis/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://x.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">X<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/HWSystemAnalysis/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
