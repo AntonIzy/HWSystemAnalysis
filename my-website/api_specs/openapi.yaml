@@ -1,0 +1,570 @@
+openapi: 3.0.3
+info:
+  title: Кошелёк для ЦР API
+  description: API для работы с блокчейн-кошельками и цифровым рублём.
+  version: 1.0.0
+
+
+servers:
+  - url: https://api.blockchain-wallet.com
+    description: Основной сервер
+
+
+tags:
+  - name: Wallets
+    description: Управление кошельками
+  - name: Transactions
+    description: Операции с кошельками
+  - name: Operations
+    description: История операций
+
+
+paths:
+  /main/allproducts/newwallet:
+    post:
+      tags:
+        - Wallets
+      summary: Создать новый кошелёк
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '201':
+          description: Кошелёк успешно создан
+          content:
+            application/json:
+              schema:
+               $ref: '#/components/schemas/NewWalletResponse'
+        '400':
+          description: Неверный запрос. Ошибка в приложении клиента может привести к отправке неправильного или неполного запроса. Например, пользователь нажал кнопку, но клиент отправил некорректный запрос из-за багов в UI.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /main:
+    get:
+      tags:
+        - Wallets
+      summary: Получить общий баланс и данные главного экрана
+      responses:
+        '200':
+          description: Данные главного экрана успешно получены
+          content:
+            application/json:
+              schema:
+               $ref: '#/components/schemas/MainScreenResponse'
+        '500':
+          description: Ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+
+  /main/{productId}/public-key:
+    get:
+      tags:
+        - Wallets
+      summary: Получить публичный ключ кошелька
+      parameters:
+       - $ref: '#/components/parameters/ProductId'
+      responses:
+        '200':
+          description: Публичный ключ успешно получен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicKeyResponse'
+        '404':
+          description: Кошелёк не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /payments/pay:
+    post:
+      tags:
+        - Transactions
+      summary: Перевести средства на другой кошелёк
+      description: Выполняет перевод средств на другой кошелёк, используя публичный ключ получателя
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '200':
+          description: Перевод успешно выполнен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponse'
+        '400':
+          description: Ошибка в параметрах запроса. Например, неверный формат данных, либо сумма перевода меньше равно нуля
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Публичный ключ получателя не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+
+  /payments/qr/processqr:
+    post:
+      tags:
+        - Transactions
+      summary: Обработать сканированный QR-код и автоматически заполнить публичный ключ
+      description: Обрабатывает данные отсканированного QR-кода, извлекает публичный ключ и автоматически подставляет его для перевода.
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProcessQrRequest'
+      responses:
+        '200':
+          description: Публичный ключ успешно извлечён и подставлен для перевода
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessQrResponse'
+        '400':
+          description: Неверный QR-код
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /payments/qr/generateqr:
+    get:
+      tags:
+        - Transactions
+      summary: Сгенерировать QR-код для публичного ключа
+      responses:
+        '200':
+          description: QR-код успешно сгенерирован
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateQrResponse'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /payments/betweenaccounts/transfer:
+    post:
+      tags:
+        - Transactions
+      summary: Перевести средства между своими счетами + конвертация
+      description: Выполняет перевод средств между своими счетами, такими как кошельки и карты, в том числе позволяет выполнить конвертацию электронных рублей на цифровые и наоборот.
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountTransferRequest'
+      responses:
+        '200':
+          description: Перевод успешно выполнен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountTransferResponse'
+        '400':
+          description: Ошибка в параметрах запроса
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Один из указанных счетов не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /main/operations:
+    get:
+      tags:
+        - Operations
+      summary: Просмотр истории операций с курсорной пагинацией
+      description: Получает историю операций для всех кошельков и карт клиента, с возможностью фильтрации по категории и дате, используя курсорную пагинацию.
+      parameters:
+        - $ref: '#/components/parameters/StartDate'
+        - $ref: '#/components/parameters/EndDate'
+        - $ref: '#/components/parameters/Category'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: История операций успешно получена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationsResponse'
+        '400':
+          description: Ошибка в параметрах запроса. Если клиентское приложение имеет баг (например, отправляет некорректные даты из-за сбоя логики), сервер получает ошибочные данные.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Нет операций, соответствующих заданным фильтрам
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+
+components:
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Уникальный идентификатор для обеспечения идемпотентности запроса
+    ProductId:
+      name: productId
+      in: path
+      required: true
+      description: Уникальный идентификатор кошелька или продукта
+      schema:
+        type: string
+        example: "wallet123"
+    StartDate:
+      name: startDate
+      in: query
+      description: Начальная дата для фильтрации операций
+      required: false
+      schema:
+        type: string
+        format: date
+        example: "2024-01-01"
+    EndDate:
+      name: endDate
+      in: query
+      description: Конечная дата для фильтрации операций
+      required: false
+      schema:
+        type: string
+        format: date
+        example: "2024-12-31"
+    Category:
+      name: category
+      in: query
+      description: Категория операций для фильтрации
+      required: false
+      schema:
+        type: string
+        enum:
+          - "Переводы"
+          - "Развлечения"
+          - "Супермаркеты"
+          - "Одежда и обувь"
+          - "НКО"
+          - "Остальное"
+        example: "shopping"
+    Cursor:
+      name: cursor
+      in: query
+      description: Курсор для получения следующей страницы данных. Пустое значение означает первую страницу.
+      required: false
+      schema:
+        type: string
+        example: "tx12345"
+    Limit:
+      name: limit
+      in: query
+      description: Количество записей, которые нужно вернуть на одной странице.
+      required: true
+      schema:
+        type: integer
+        example: 10
+
+
+
+  schemas:
+    NewWalletResponse:
+      type: object
+      properties:
+        publicKey:
+          type: string
+          example: abc123xyz
+        createdAt:
+          type: string
+          format: date-time
+          example: "2024-11-16T10:00:00Z"
+
+    MainScreenResponse:
+      type: object
+      properties:
+        products:
+          type: array
+          description: Список продуктов клиента (карты и кошельки)
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/Card'
+              - $ref: '#/components/schemas/Wallet'
+
+    PublicKeyResponse:
+      type: object
+      properties:
+        publicKey:
+          type: string
+          description: Публичный ключ кошелька
+          example: abc123xyz
+
+
+    Card:
+      type: object
+      description: Дебетовая карта
+      properties:
+        maskedId:
+          type: string
+          description: Замаскированный номер карты
+          example: "****1234"
+        balance:
+          type: number
+          format: float
+          description: Баланс карты
+          example: 10000.00
+        currency:
+          type: string
+          description: Валюта карты
+          example: RUB
+
+    Wallet:
+      type: object
+      description: Блокчейн-кошелёк
+      properties:
+        maskedId:
+          type: string
+          description: Замаскированный публичный ключ кошелька
+          example: "****xyz"
+        balance:
+          type: number
+          format: float
+          description: Баланс кошелька
+          example: 5000.00
+        currency:
+          type: string
+          description: Валюта кошелька
+          example: RUB
+
+    PaymentRequest:
+      type: object
+      required:
+        - publicKey
+        - amount
+      properties:
+        publicKey:
+          type: string
+          description: Публичный ключ получателя
+          example: "abc123xyz"
+        amount:
+          type: number
+          format: float
+          description: Сумма перевода в цифровых рублях
+          example: 1500.50
+        note:
+          type: string
+          description: Примечание к переводу
+          example: "Оплата за услуги"
+
+    PaymentResponse:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: Уникальный идентификатор транзакции
+          example: "tx12345"
+        status:
+          type: string
+          description: Статус перевода
+          enum:
+            - success
+            - failed
+            - pending
+          example: "success"
+
+    ProcessQrRequest:
+      type: object
+      properties:
+        qrCode:
+          type: string
+          description: Содержит отсканированный QR-код
+          example: "qr_abc123xyz"
+
+    ProcessQrResponse:
+      type: object
+      properties:
+        publicKey:
+          type: string
+          description: Извлечённый публичный ключ из QR-кода, который будет использован для перевода
+          example: "abc123xyz"
+        redirectToPayment:
+          type: boolean
+          description: Флаг, указывающий, что пользователь должен быть перенаправлен на экран ввода суммы для перевода
+          example: true
+
+    GenerateQrResponse:
+      type: object
+      properties:
+        qrCode:
+          type: string
+          description: Данные QR-кода в виде строки (содержит публичный ключ)
+          example: "qr_abc123xyz"
+
+    AccountTransferRequest:
+      type: object
+      required:
+        - fromAccount
+        - toAccount
+        - amount
+      properties:
+        fromAccount:
+          type: string
+          description: Уникальный идентификатор счета, с которого будет списана сумма (publicKey или cardId)
+          example: "wallet_12345"
+        toAccount:
+          type: string
+          description: Уникальный идентификатор счета, на который будут зачислены средства (publicKey или cardId)
+          example: "card_67890"
+        amount:
+          type: number
+          format: float
+          description: Сумма для перевода
+          example: 2000.75
+
+    AccountTransferResponse:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: Уникальный идентификатор транзакции
+          example: "tx67890"
+        status:
+          type: string
+          description: Статус перевода
+          enum:
+            - success
+            - failed
+            - pending
+          example: "success"
+
+    OperationsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Общее количество операций, подходящих под фильтры
+          example: 150
+        operations:
+          type: array
+          items:
+            type: object
+            properties:
+              transactionId:
+                type: string
+                description: Уникальный идентификатор транзакции
+                example: "tx12345"
+              date:
+                type: string
+                format: date-time
+                description: Дата и время операции
+                example: "2024-11-10T12:00:00Z"
+              amount:
+                type: number
+                format: float
+                description: Сумма операции
+                example: 1500.50
+              category:
+                type: string
+                description: Категория операции
+                example: "shopping"
+              fromAccount:
+                type: string
+                description: Счет, с которого были списаны средства
+                example: "wallet_12345"
+              toAccount:
+                type: string
+                description: Счет, на который были зачислены средства
+                example: "card_67890"
+        nextCursor:
+          type: string
+          description: Курсор для следующей страницы операций
+          example: "tx67890"
+
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Код ошибки
+          example: 404
+        message:
+          type: string
+          description: Сообщение об ошибке
+
+  securitySchemes:
+        BearerAuth:
+          type: http
+          scheme: bearer
+          bearerFormat: JWT
+
+
+security:
+  - BearerAuth: []
